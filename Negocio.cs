@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using proyecto2.modelos;
 
 namespace ConsoleApp1.Clases
 {
@@ -16,14 +17,14 @@ namespace ConsoleApp1.Clases
         public string? Telefono { get; set; }
         public string? Email { get; set; }
         public int contadorPedidos;  // Contador para llevar el seguimiento de los pedidos en el array
-        public Pedido[] Pedidos { get; set; }  // Relación de COMPOSICIÓN: 
-                                               // Un Negocio tiene una colección de Pedido
-                                               // si se elimina el Negocio (el todo) se eliminan tambien los Pedidos
-                                               // Nota: La composición es una relación fuerte donde la existencia 
-                                               // de las instancias de la clase componente (en este caso, Pedido) depende 
-                                               // de la instancia de la clase contenedora (en este caso, Negocio). 
-                                               // Si la instancia de la clase contenedora se elimina, también se eliminan 
-                                               // las instancias de la clase componente.
+        public PedidoPreventivo[] Pedidos { get; set; }  // Relación de COMPOSICIÓN: 
+                                                         // Un Negocio tiene una colección de PedidoPreventivo
+                                                         // si se elimina el Negocio (el todo) se eliminan tambien los Pedidos
+                                                         // Nota: La composición es una relación fuerte donde la existencia 
+                                                         // de las instancias de la clase componente (en este caso, PedidoPreventivo) depende 
+                                                         // de la instancia de la clase contenedora (en este caso, Negocio). 
+                                                         // Si la instancia de la clase contenedora se elimina, también se eliminan 
+                                                         // las instancias de la clase componente.
 
 
         // Constructores
@@ -35,14 +36,13 @@ namespace ConsoleApp1.Clases
             Ubicacion = "";
             Telefono = "";
             Email = "";
-            // revsiar la linea siguiente
-            Pedidos = new Pedido[100];  // Inicialización del array con la capacidad maxima del arreglo especificada
+            Pedidos = new PedidoPreventivo[100];  // Inicialización del array con la capacidad maxima del arreglo especificada
             contadorPedidos = 0;
 
             // Inicialización de cada posición del array
             for (int i = 0; i < Pedidos.Length; i++)
             {
-                Pedidos[i] = new Pedido(0, 0, DateTime.Now);  // Inicializa cada posición con un nuevo Pedido vacío
+                Pedidos[i] = new PedidoPreventivo();  // Inicializa cada posición con un nuevo PedidoPreventivo vacío
             }
         }
         public Negocio(int id, string nombre, string ubicacion, string telefono, string email, int capacidadPedidos)
@@ -52,13 +52,13 @@ namespace ConsoleApp1.Clases
             Ubicacion = ubicacion;
             Telefono = telefono;
             Email = email;
-            Pedidos = new Pedido[capacidadPedidos];  // Inicialización del array con la capacidad maxima del arreglo especificada
+            Pedidos = new PedidoPreventivo[capacidadPedidos];  // Inicialización del array con la capacidad maxima del arreglo especificada
             contadorPedidos = 0;
 
             //Inicialización de cada posición del array
             for (int i = 0; i < Pedidos.Length; i++)
             {
-                Pedidos[i] = new Pedido(0, 0, DateTime.Now);  // Inicializa cada posición con un nuevo Pedido vacío
+                Pedidos[i] = new PedidoPreventivo();  // Inicializa cada posición con un nuevo PedidoPreventivo vacío
             }
         }
     }
