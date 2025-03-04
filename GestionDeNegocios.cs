@@ -7,10 +7,17 @@ namespace ConsoleApp1.Clases
 {
     public class GestionDeNegocios
     {
-
         // Menu para la Gestion de NEGOCIOS
         public static void Menu(Negocio[] negocios, ref int contadorNegocios)
         {
+            // Inicializar el arreglo de negocios con los predefinidos si está vacío
+            if (contadorNegocios == 0)
+            {
+                var negociosPredefinidos = ObtenerNegociosPredefinidos();
+                Array.Copy(negociosPredefinidos, negocios, negociosPredefinidos.Length);
+                contadorNegocios = negociosPredefinidos.Length;
+            }
+
             bool submenuActivo = true;
 
             while (submenuActivo)
@@ -68,7 +75,6 @@ namespace ConsoleApp1.Clases
             }
         }
 
-
         // -----------------------------------------------------------------
         //          VER un negocio del arreglo  de negocios
         // -----------------------------------------------------------------
@@ -83,7 +89,6 @@ namespace ConsoleApp1.Clases
                     Console.WriteLine(new string('-', 70));
                 }
                 Console.WriteLine($"{negocio.Id} | {negocio.Nombre} | {negocio.Ubicacion} | {negocio.Telefono} | {negocio.Email} | {negocio.contadorPedidos}");
-
             }
         }
 
@@ -105,7 +110,6 @@ namespace ConsoleApp1.Clases
                 {
                     MostrarUnNegocio(negocios[i]);
                 }
-
             }
             else
             {
@@ -114,7 +118,6 @@ namespace ConsoleApp1.Clases
                 Console.ReadKey();
             }
         }
-
 
         // -----------------------------------------------------------------
         //          AGREGAR un nuevo negocio al arreglo  de negocios
@@ -160,7 +163,6 @@ namespace ConsoleApp1.Clases
                 }
             } while (string.IsNullOrWhiteSpace(nuevoNegocio.Telefono));
 
-
             do
             {
                 Console.Write("Ingrese el email del negocio: ");
@@ -171,7 +173,6 @@ namespace ConsoleApp1.Clases
                     Console.WriteLine("Error: Ingrese un dato válido.");
                 }
             } while (string.IsNullOrWhiteSpace(nuevoNegocio.Email));
-
 
             if (contadorNegocios < negocios.Length)
             {
@@ -208,7 +209,6 @@ namespace ConsoleApp1.Clases
                     {
                         if (negocios[index] != null)
                         {
-
                             Console.Write("Ingrese el nuevo nombre del negocio (dejar en blanco para no modificar): ");
                             string nombre = Console.ReadLine();
                             if (!string.IsNullOrEmpty(nombre)) negocios[index].Nombre = nombre;
@@ -229,7 +229,6 @@ namespace ConsoleApp1.Clases
                             Console.WriteLine("Presione cualquier tecla para continuar...");
                             Console.ReadKey();
                         }
-
                     }
                     else
                     {
@@ -251,7 +250,6 @@ namespace ConsoleApp1.Clases
                 Console.ReadKey();
             }
         } // fin modificar negocio
-
 
         // -----------------------------------------------------------------
         //          ELIMINAR un negocio del arreglo  de negocios
@@ -307,7 +305,6 @@ namespace ConsoleApp1.Clases
             }
         }
 
-
         // Método para buscar un negocio por su ID
         private static int BuscarNegocioPorID(int idNegocio, Negocio[] negocios, int contadorNegocios)
         {
@@ -340,16 +337,15 @@ namespace ConsoleApp1.Clases
                 return true;
             }
             return false; // no está vacio
-
         }
 
         public static Negocio[] ObtenerNegociosPredefinidos()
         {
             return new Negocio[]
             {
-        new Negocio(1, "Tienda Electrónica Global", "Calle Principal 123", "555-1234", "ana@tiendaelectronica.com", 100),
-        new Negocio(2, "Supermercado La Esquina", "Avenida Central 456", "555-5678", "carlos@supermercadolaesquina.com", 100),
-        new Negocio(3, "Ferretería El Tornillo Feliz", "Calle Secundaria 789", "555-9012", "laura@eltornillofeliz.com", 100)
+                new Negocio(1, "Tienda Electrónica Global", "Calle Principal 123", "555-1234", "ana@tiendaelectronica.com", 100),
+                new Negocio(2, "Supermercado La Esquina", "Avenida Central 456", "555-5678", "carlos@supermercadolaesquina.com", 100),
+                new Negocio(3, "Ferretería El Tornillo Feliz", "Calle Secundaria 789", "555-9012", "laura@eltornillofeliz.com", 100)
             };
         }
 

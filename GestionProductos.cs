@@ -124,53 +124,41 @@ namespace ConsoleApp1.Clases
                     Console.Write("Tipo de equipamiento: ");
                     string tipo = Console.ReadLine();
                     nuevoProducto = new EquipamientoDeportivo(nombre, precio, cantidadEnStock, tipo);
-                    //Console.WriteLine("DEPURANDO:CASE_1, nuevoProducto=" + nuevoProducto.Nombre + "tipo=" + tipo);
                     break;
                 case 2:
                     Console.Write("Talla: ");
                     string talla = Console.ReadLine();
                     nuevoProducto = new RopaYCalzadoDeportivo(nombre, precio, cantidadEnStock, talla);
-                    //Console.WriteLine("DEPURANDO:CASE_2, nuevoProducto=" + nuevoProducto.Nombre + "talla=" + talla);
                     break;
                 case 3:
                     Console.Write("Material: ");
                     string material = Console.ReadLine();
                     nuevoProducto = new AccesoriosParaEntrenamiento(nombre, precio, cantidadEnStock, material);
-                    //Console.WriteLine("DEPURANDO:CASE_3, nuevoProducto=" + nuevoProducto.Nombre + "material=" + material);
                     break;
                 case 4:
                     Console.Write("Uso: ");
                     string uso = Console.ReadLine();
                     nuevoProducto = new EquipamientoParaDeportesDeAventura(nombre, precio, cantidadEnStock, uso);
-                    //Console.WriteLine("DEPURANDO:CASE_4, nuevoProducto=" + nuevoProducto.Nombre + "uso=" + uso);
                     break;
                 case 5:
                     Console.Write("Ingredientes: ");
                     string ingredientes = Console.ReadLine();
                     nuevoProducto = new NutricionYSuplementos(nombre, precio, cantidadEnStock, ingredientes);
-                    //Console.WriteLine("DEPURANDO:CASE_5, nuevoProducto=" + nuevoProducto.Nombre + "ingredientes=" + ingredientes);
                     break;
                 case 6:
                     Console.Write("Especificaciones: ");
                     string especificaciones = Console.ReadLine();
                     nuevoProducto = new TecnologiaYDispositivosDeportivos(nombre, precio, cantidadEnStock, especificaciones);
-                    //Console.WriteLine("DEPURANDO:CASE_6, nuevoProducto=" + nuevoProducto.Nombre + "ingredientes=" + especificaciones);
                     break;
             }
 
-
-            //Console.WriteLine("DEPURANDO:antes de: stockProductos.IngresarProducto(nuevoProducto);, nombre=" + nuevoProducto.Nombre);
-
             // Ingresar el nuevo producto al stock
             stockProductos.IngresarProducto(nuevoProducto);
-
-            //Console.WriteLine("DEPURANDO:despues de: stockProductos.IngresarProducto(nuevoProducto);, nombre=" + nuevoProducto.Nombre);
 
             Console.WriteLine("Producto ingresado exitosamente.");
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
         } // fin INGRESAR productos
-
 
         // -----------------------------------------------------------------
         //      Método para ELIMINAR un producto por su ID en el Stock
@@ -191,8 +179,6 @@ namespace ConsoleApp1.Clases
                 Console.ReadKey();
             }
         }
-
-
 
         // -----------------------------------------------------------------
         //              MODIFICAR productos del Stock
@@ -272,37 +258,31 @@ namespace ConsoleApp1.Clases
                             Console.Write("Tipo de equipamiento: ");
                             string tipo = Console.ReadLine();
                             nuevoProducto = new EquipamientoDeportivo(nombre, precio, cantidadEnStock, tipo);
-                            //Console.WriteLine("DEPURANDO:CASE_1, nuevoProducto=" + nuevoProducto.Nombre + "tipo=" + tipo);
                             break;
                         case 2:
                             Console.Write("Talla: ");
                             string talla = Console.ReadLine();
                             nuevoProducto = new RopaYCalzadoDeportivo(nombre, precio, cantidadEnStock, talla);
-                            //Console.WriteLine("DEPURANDO:CASE_2, nuevoProducto=" + nuevoProducto.Nombre + "talla=" + talla);
                             break;
                         case 3:
                             Console.Write("Material: ");
                             string material = Console.ReadLine();
                             nuevoProducto = new AccesoriosParaEntrenamiento(nombre, precio, cantidadEnStock, material);
-                            //Console.WriteLine("DEPURANDO:CASE_3, nuevoProducto=" + nuevoProducto.Nombre + "material=" + material);
                             break;
                         case 4:
                             Console.Write("Uso: ");
                             string uso = Console.ReadLine();
                             nuevoProducto = new EquipamientoParaDeportesDeAventura(nombre, precio, cantidadEnStock, uso);
-                            //Console.WriteLine("DEPURANDO:CASE_4, nuevoProducto=" + nuevoProducto.Nombre + "uso=" + uso);
                             break;
                         case 5:
                             Console.Write("Ingredientes: ");
                             string ingredientes = Console.ReadLine();
                             nuevoProducto = new NutricionYSuplementos(nombre, precio, cantidadEnStock, ingredientes);
-                            //Console.WriteLine("DEPURANDO:CASE_5, nuevoProducto=" + nuevoProducto.Nombre + "ingredientes=" + ingredientes);
                             break;
                         case 6:
                             Console.Write("Especificaciones: ");
                             string especificaciones = Console.ReadLine();
                             nuevoProducto = new TecnologiaYDispositivosDeportivos(nombre, precio, cantidadEnStock, especificaciones);
-                            //Console.WriteLine("DEPURANDO:CASE_6, nuevoProducto=" + nuevoProducto.Nombre + "ingredientes=" + especificaciones);
                             break;
                     }
                     nuevoProducto.Id = id_modif; // id: unico atributo que no se modificará del Producto original
@@ -325,42 +305,5 @@ namespace ConsoleApp1.Clases
                 Console.ReadKey();
             }
         } // fin MODIFICAR productos
-        public static Producto[] ObtenerProductosPredefinidos()
-        {
-            return new Producto[]
-            {
-        // Equipamiento Deportivo
-        new EquipamientoDeportivo("Pelotas (fútbol, baloncesto, voleibol)", 100, 50, "Balones"),
-        new EquipamientoDeportivo("Pesas y mancuernas", 150, 30, "Pesas"),
-        new EquipamientoDeportivo("Bicicletas y accesorios", 300, 20, "Bicicletas"),
-
-        // Ropa y Calzado Deportivo
-        new RopaYCalzadoDeportivo("Zapatillas para running", 200, 100, "M"),
-        new RopaYCalzadoDeportivo("Camisetas y shorts deportivos", 50, 200, "L"),
-        new RopaYCalzadoDeportivo("Ropa térmica para entrenamiento", 80, 150, "XL"),
-
-        // Accesorios para Entrenamiento
-        new AccesoriosParaEntrenamiento("Bandas elásticas", 20, 300, "Goma"),
-        new AccesoriosParaEntrenamiento("Guantes de gimnasio", 25, 100, "Cuero"),
-        new AccesoriosParaEntrenamiento("Botellas de hidratación", 15, 200, "Plástico"),
-
-        // Equipamiento para Deportes de Aventura
-        new EquipamientoParaDeportesDeAventura("Cascos de escalada", 60, 50, "Escalada"),
-        new EquipamientoParaDeportesDeAventura("Arneses y cuerdas", 70, 40, "Rappel"),
-        new EquipamientoParaDeportesDeAventura("Tiendas de campaña y mochilas técnicas", 100, 30, "Camping"),
-
-        // Nutrición y Suplementos
-        new NutricionYSuplementos("Bebidas energéticas y rehidratantes", 5, 500, "Electrolitos"),
-        new NutricionYSuplementos("Barras de proteínas", 10, 400, "Proteínas"),
-        new NutricionYSuplementos("Vitaminas y suplementos deportivos", 15, 300, "Vitaminas"),
-
-        // Tecnología y Dispositivos Deportivos
-        new TecnologiaYDispositivosDeportivos("Relojes inteligentes", 200, 50, "GPS, Pulsómetro"),
-        new TecnologiaYDispositivosDeportivos("Auriculares deportivos", 100, 100, "Resistentes al agua"),
-        new TecnologiaYDispositivosDeportivos("Sensores de rendimiento", 150, 30, "Medición de rendimiento"),
-        new TecnologiaYDispositivosDeportivos("Cámaras deportivas (tipo GoPro)", 300, 20, "Alta definición")
-            };
-        }
-
     }
 }

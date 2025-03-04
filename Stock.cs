@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using proyecto2.modelos;
 
 
 namespace ConsoleApp1.Clases
@@ -13,18 +14,16 @@ namespace ConsoleApp1.Clases
         private int numProductos;
         private Producto?[] productos;
 
-        // Constructor público
+        const decimal IVA = 0.16m;
+
         // Constructor público
         public Stock()
         {
             numProductos = 0;
             productos = new Producto[100]; // Capacidad máxima de 100 productos
         }
-        //       Muestra la información de todos los productos en el stock, 
-        //       incluyendo los atributos específicos de sus subclases.
-        /// Muestra la información de todos los productos en el stock, incluyendo los atributos específicos de sus subclases.
 
-
+        // Muestra la información de todos los productos en el stock, incluyendo los atributos específicos de sus subclases.
         public void mostrarUnProductoDelStockPorIndex(int i, bool mostrarEncabezado = false)
         {
             if (mostrarEncabezado)
@@ -95,19 +94,15 @@ namespace ConsoleApp1.Clases
         // Método para ingresar un producto
         public void IngresarProducto(Producto p)
         {
-            //Console.WriteLine("DEPURANDO: al entrar a: public void IngresarProducto(Producto p), p.Nombre=" + p.Nombre);
             if (numProductos < productos.Length)
             {
                 productos[numProductos] = p;
-                //Console.WriteLine("DEPURANDO: en public void IngresarProducto(Producto p), productos[numProductos].Nombre=" + productos[numProductos].Nombre);
                 numProductos++;
-                //Console.WriteLine($"DEPURANDO: en public void IngresarProducto(Producto p), numProductos={numProductos}");
             }
             else
             {
                 Console.WriteLine($"No se puede agregar un nuevo producto porque el arreglo alcanzó su capacidad máxima de {productos.Length}.");
             }
-            //Console.WriteLine("DEPURANDO: al salir de public void IngresarProducto(Producto p), p.Nombre=" + p.Nombre);
         }
 
         // Método que dado el id del producto el obj producto con los datos actualizados 
@@ -193,8 +188,65 @@ namespace ConsoleApp1.Clases
 
         }
 
+        // Método para generar factura en base a un pedido
+        public void GenerarFactura(PedidoPreventivo pedido)
+        {
+            if (pedido.LineasPedido == null || pedido.LineasPedido.Length == 0)
+            {
+                Console.WriteLine("El pedido no contiene productos.");
+                return;
+            }
+
+            ProductoCantidad[] venta = new ProductoCantidad[pedido.LineasPedido.Length];
+            int itemsVendidos = 0;
+            decimal subtotal = 0;
+            int totalItems = 0;
+
+            foreach (var linea in pedido.LineasPedido)
+            {
+                Producto producto = ObtenerProductoPorID(linea.Producto.Id);
+                if (producto != null)
+                {
+                    if (producto.CantidadEnStock >= linea.Cantidad)
+                    {
+                        producto.CantidadEnStock -= linea.Cantidad;
+                        venta[itemsVendidos] = new ProductoCantidad(producto, linea.Cantidad);
+                        itemsVendidos++;
+                        subtotal += producto.Precio * linea.Cantidad;
+                        totalItems += linea.Cantidad;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Stock insuficiente para el producto: {producto.Nombre}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Producto no encontrado: {linea.Producto.Nombre}");
+                }
+            }
+
+            int gruposDescuento = totalItems / 10;
+            decimal porcentajeDescuento = gruposDescuento * 0.05m;
+            decimal descuento = subtotal * porcentajeDescuento;
+
+            decimal subtotalConDescuento = subtotal - descuento;
+            decimal valorIva = subtotalConDescuento * IVA;
+            decimal total = subtotalConDescuento + valorIva;
+
+            Console.WriteLine("\n--- FACTURA ---");
+            for (int i = 0; i < itemsVendidos; i++)
+            {
+                Console.WriteLine($"{venta[i].Producto.Nombre} x{venta[i].Cantidad}: {venta[i].Producto.Precio * venta[i].Cantidad:C}");
+            }
+
+            Console.WriteLine("\nDETALLE DE PAGO:");
+            Console.WriteLine($"Productos comprados: {totalItems}");
+            Console.WriteLine($"Subtotal: {subtotal:C}");
+            Console.WriteLine($"Descuento ({porcentajeDescuento:P0}): -{descuento:C}");
+            Console.WriteLine($"Subtotal con descuento: {subtotalConDescuento:C}");
+            Console.WriteLine($"IVA (16%): {valorIva:C}");
+            Console.WriteLine($"TOTAL A PAGAR: {total:C}\n");
+        }
     }
-
-
-
 }
