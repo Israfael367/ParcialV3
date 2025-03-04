@@ -343,6 +343,16 @@ namespace ConsoleApp1.Clases
 
         }
 
+        public static Negocio[] ObtenerNegociosPredefinidos()
+        {
+            return new Negocio[]
+            {
+        new Negocio(1, "Tienda Electrónica Global", "Calle Principal 123", "555-1234", "ana@tiendaelectronica.com", 100),
+        new Negocio(2, "Supermercado La Esquina", "Avenida Central 456", "555-5678", "carlos@supermercadolaesquina.com", 100),
+        new Negocio(3, "Ferretería El Tornillo Feliz", "Calle Secundaria 789", "555-9012", "laura@eltornillofeliz.com", 100)
+            };
+        }
+
         private static bool ArregloNegociosEstalleno(int contadorNegocios)
         { // Está lleno el arreglo Negocios[] que almacena el Negocio?
             if (contadorNegocios == 100) // el Negocio está lleno

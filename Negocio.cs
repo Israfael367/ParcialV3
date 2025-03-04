@@ -61,30 +61,6 @@ namespace ConsoleApp1.Clases
                 Pedidos[i] = new Pedido(0, 0, DateTime.Now);  // Inicializa cada posición con un nuevo Pedido vacío
             }
         }
-
-
-        // Métodos
-        /*public void RegistrarNegocio()
-        {
-            
-        }
-
-
-        public void ModificarNegocio()
-        {
-            // Lógica para modificar los datos de un negocio
-        }
-
-        public void EliminarNegocio()
-        {
-            // Lógica para eliminar un negocio
-        }
-
-        public void ListarNegocios()
-        {
-            // Lógica para listar todos los negocios
-        }
-        */
     }
 
 }
