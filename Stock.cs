@@ -4,10 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using proyecto2.modelos;
 
-
 namespace ConsoleApp1.Clases
 {
-
     public class Stock
     {
         // Atributos privados
@@ -87,8 +85,6 @@ namespace ConsoleApp1.Clases
             {
                 Console.WriteLine("No hay productos, el Stock está vacio!!.");
             }
-            //Console.WriteLine("Presione cualquier tecla para continuar...");
-            //Console.ReadKey();
         }
 
         // Método para ingresar un producto
@@ -105,11 +101,19 @@ namespace ConsoleApp1.Clases
             }
         }
 
+        // Método para ingresar productos predefinidos
+        public void IngresarProductosPredefinidos(Producto[] productosPredefinidos)
+        {
+            foreach (var producto in productosPredefinidos)
+            {
+                IngresarProducto(producto);
+            }
+        }
+
         // Método que dado el id del producto el obj producto con los datos actualizados 
         // procede a almacenarlo en la ubicacion correspondiente
         public void ModificarProductoIndex(int index, Producto nuevoP)
         {
-            productos[index] = new Producto(); // Reinicializar la  posición index
             productos[index] = nuevoP;
         }
 
@@ -126,7 +130,7 @@ namespace ConsoleApp1.Clases
                     {
                         productos[i] = productos[i + 1];
                     }
-                    productos[numProductos - 1] = new Producto(); // Reinicializar la última posición
+                    productos[numProductos - 1] = null; // Reinicializar la última posición
                     numProductos--;
                     Console.WriteLine($"El producto con ID = {id} fue eliminado del Stock.");
                 }
