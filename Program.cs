@@ -11,6 +11,7 @@ namespace ConsoleApp1
         static Negocio[] Negocios = new Negocio[100]; // creamos el Arreglo de negocios
         static int contadorNegocios = 0; // Contador de negocios en el arreglo
         static GestorPedidos gestorPedidos = new GestorPedidos();
+        static Factura gestorFacturas = new Factura();
 
         static void Main(string[] args)
         {
@@ -118,7 +119,7 @@ namespace ConsoleApp1
                 Console.Clear();
                 Console.WriteLine("=== FACTURACIÓN Y GESTIÓN DE DATOS ===");
                 Console.WriteLine("1. Generar Factura");
-                Console.WriteLine("2. Consultar Factura");
+                Console.WriteLine("2. Ver Facturas");
                 Console.WriteLine("0. Volver al Menú Principal");
                 Console.Write("Seleccione una opción: ");
 
@@ -127,11 +128,10 @@ namespace ConsoleApp1
                 switch (opcion)
                 {
                     case "1":
-                        GenerarFactura();
+                        gestorFacturas.GenerarFactura(gestorPedidos);
                         break;
                     case "2":
-                        // Lógica para consultar factura
-                        Console.WriteLine("Función para consultar factura...");
+                        gestorFacturas.VerFacturas();
                         break;
                     case "0": // el "0" por convención se usa en sistemas de menú para salir o volver al menú principal.
                         submenuActivo = false;
@@ -141,33 +141,6 @@ namespace ConsoleApp1
                         Console.ReadKey();
                         break;
                 }
-            }
-        }
-
-        static void GenerarFactura()
-        {
-            Console.Clear();
-            Console.WriteLine("=== GENERAR FACTURA ===");
-
-            if (gestorPedidos.cantidadPedidos == 0)
-            {
-                Console.WriteLine("No hay pedidos disponibles.");
-                Console.WriteLine("Presione cualquier tecla para continuar...");
-                Console.ReadKey();
-                return;
-            }
-
-            gestorPedidos.VerPedidos();
-            Console.Write("Seleccione el número de pedido para generar la factura: ");
-            if (int.TryParse(Console.ReadLine(), out int numeroPedido) && numeroPedido >= 1 && numeroPedido <= gestorPedidos.cantidadPedidos)
-            {
-                PedidoPreventivo pedido = gestorPedidos.pedidos[numeroPedido - 1];
-                StockProductos.GenerarFactura(pedido);
-            }
-            else
-            {
-                Console.WriteLine("Número de pedido inválido. Presione cualquier tecla para continuar...");
-                Console.ReadKey();
             }
         }
     }

@@ -39,9 +39,15 @@ namespace proyecto2.gestores
             }
             Console.ReadKey();
         }
-
         public void AgregarPedido(Negocio[] negocios, Producto[] productos)
         {
+            if (negocios == null || productos == null)
+            {
+                Console.WriteLine("Error: Los negocios o productos no están inicializados.");
+                Console.ReadKey();
+                return;
+            }
+
             try
             {
                 while (true)
@@ -52,7 +58,10 @@ namespace proyecto2.gestores
                     Console.WriteLine("Seleccione un negocio :");
                     for (int i = 0; i < negocios.Length; i++)
                     {
-                        Console.WriteLine($"\n {i + 1}.{negocios[i].Nombre} - {negocios[i].Ubicacion}, {negocios[i].Telefono}, {negocios[i].Email}\n");
+                        if (negocios[i] != null)
+                        {
+                            Console.WriteLine($"\n {i + 1}.{negocios[i].Nombre} - {negocios[i].Ubicacion}, {negocios[i].Telefono}, {negocios[i].Email}\n");
+                        }
                     }
                     Console.WriteLine("\n 0. Volver al menú principal\n");
                     Console.Write("Opción: ");
@@ -66,7 +75,7 @@ namespace proyecto2.gestores
 
                     Negocio negocio;
 
-                    if (opcionNegocio >= 1 && opcionNegocio <= negocios.Length)
+                    if (opcionNegocio >= 1 && opcionNegocio <= negocios.Length && negocios[opcionNegocio - 1] != null)
                     {
                         negocio = negocios[opcionNegocio - 1];
 
@@ -225,7 +234,6 @@ namespace proyecto2.gestores
                 Console.ReadKey();
             }
         }
-
         public void EliminarPedido()
         {
             Console.Clear();
