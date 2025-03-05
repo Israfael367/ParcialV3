@@ -6,7 +6,6 @@ namespace ConsoleApp1.Clases
     {
         private static int contadorId = 0; // Variable estática para autoincremento
         // Atributos
-        //public int Id { get; private set; } 
         public int Id { get; set; }
         public string Nombre { get; set; }
         public decimal Precio { get; set; }
@@ -139,6 +138,5 @@ namespace ConsoleApp1.Clases
             base.MostrarInfo();
             Console.WriteLine($"Especificaciones: {Especificaciones}");
         }
-
     }
 }

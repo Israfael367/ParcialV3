@@ -226,12 +226,334 @@ namespace proyecto2.gestores
             }
         }
 
+        public void EliminarPedido()
+        {
+            Console.Clear();
+            Console.WriteLine("=== ELIMINAR PEDIDO ===");
+            if (cantidadPedidos == 0)
+            {
+                Console.WriteLine("No hay pedidos para eliminar.");
+                Console.ReadKey();
+                return;
+            }
+
+            for (int i = 0; i < cantidadPedidos; i++)
+            {
+                Console.WriteLine($"{i + 1}. {pedidos[i].Negocio.Nombre} - Fecha: {pedidos[i].FechaPedido}");
+            }
+            Console.WriteLine("0. Volver"); // Opción para volver
+            Console.Write("Seleccione el número de pedido a eliminar: ");
+
+            if (int.TryParse(Console.ReadLine(), out int opcion))
+            {
+                if (opcion == 0) // Si se selecciona "0. Volver"
+                {
+                    return; // Regresar al menú principal
+                }
+
+                if (opcion >= 1 && opcion <= cantidadPedidos)
+                {
+                    // Desplazar los pedidos restantes una posición hacia atrás
+                    for (int i = opcion - 1; i < cantidadPedidos - 1; i++)
+                    {
+                        pedidos[i] = pedidos[i + 1];
+                    }
+
+                    // Marcar el último pedido como nulo
+                    pedidos[cantidadPedidos - 1] = null;
+                    cantidadPedidos--;
+
+                    Console.WriteLine("Pedido eliminado correctamente.");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("Opción inválida.");
+                    Console.ReadKey();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Opción inválida.");
+                Console.ReadKey();
+            }
+        }
+
+        public void ModificarPedido()
+        {
+            if (cantidadPedidos == 0)
+            {
+                Console.WriteLine("No hay pedidos para modificar.");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.Clear();
+            Console.WriteLine("=== MODIFICAR PEDIDO ===");
+            Console.WriteLine("Seleccione el número de pedido que desea modificar:");
+
+            for (int i = 0; i < cantidadPedidos; i++)
+            {
+                Console.WriteLine($"{i + 1}. Pedido para {pedidos[i].Negocio.Nombre}, Fecha: {pedidos[i].FechaPedido}");
+            }
+
+            Console.WriteLine("0. Volver");
+            Console.Write("Opción: ");
+
+            if (int.TryParse(Console.ReadLine(), out int opcionPedido))
+            {
+                if (opcionPedido == 0)
+                {
+                    return;
+                }
+
+                if (opcionPedido >= 1 && opcionPedido <= cantidadPedidos)
+                {
+                    int indicePedido = opcionPedido - 1;
+
+                    while (true)
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"=== MODIFICAR PEDIDO {opcionPedido} ===");
+                        Console.WriteLine($"Negocio: {pedidos[indicePedido].Negocio.Nombre}, Fecha: {pedidos[indicePedido].FechaPedido}");
+                        Console.WriteLine("Productos:");
+
+                        for (int j = 0; j < pedidos[indicePedido].LineasPedido.Length; j++)
+                        {
+                            if (pedidos[indicePedido].LineasPedido[j] != null)
+                            {
+                                Console.WriteLine($"{j + 1}. {pedidos[indicePedido].LineasPedido[j].Producto.Nombre} - Cantidad: {pedidos[indicePedido].LineasPedido[j].Cantidad}");
+                            }
+                        }
+
+                        Console.WriteLine("\nOpciones:");
+                        Console.WriteLine("1. Cambiar cantidad de producto");
+                        Console.WriteLine("2. Eliminar producto");
+                        Console.WriteLine("3 Agregar producto ");
+                        Console.WriteLine("4. Aceptar pedido");
+                        Console.WriteLine("0. Volver al menú principal");
+                        Console.Write("Opción: ");
+
+                        if (!int.TryParse(Console.ReadLine(), out int opcion))
+                        {
+                            Console.WriteLine("Opción inválida. Presione cualquier tecla para continuar...");
+                            Console.ReadKey();
+                            continue;
+                        }
+
+                        switch (opcion)
+                        {
+                            case 1:
+                                CambiarCantidadProducto(indicePedido);
+                                break;
+                            case 2:
+                                EliminarProducto(indicePedido);
+                                break;
+                            case 3:
+                                AgregarProductoAPedido(indicePedido);
+                                break;
+                            case 4:
+                                AceptarPedido(indicePedido);
+                                return;
+                            case 0:
+                                return;
+                            default:
+                                Console.WriteLine("Opción inválida. Presione cualquier tecla para continuar...");
+                                Console.ReadKey();
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Opción inválida.");
+                    Console.ReadKey();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Opción inválida.");
+                Console.ReadKey();
+            }
+        }
+
+        public void VerOrdenesEntrega()
+        {
+            Console.Clear();
+            Console.WriteLine("=== ÓRDENES DE ENTREGA ===");
+            for (int i = 0; i < cantidadOrdenesEntrega; i++)
+            {
+                Console.WriteLine($"Orden de entrega {i + 1}:");
+                Console.WriteLine($" Negocio: {ordenesEntrega[i].Negocio.Nombre}");
+                Console.WriteLine($" Fecha: {ordenesEntrega[i].FechaPedido}");
+                Console.WriteLine(" Productos:");
+
+                decimal totalPedido = 0;
+
+                for (int j = 0; j < ordenesEntrega[i].LineasPedido.Length; j++)
+                {
+                    if (ordenesEntrega[i].LineasPedido[j] != null)
+                    {
+                        Console.WriteLine($"  - {ordenesEntrega[i].LineasPedido[j].Producto.Nombre}: {ordenesEntrega[i].LineasPedido[j].Cantidad} unidades - ${ordenesEntrega[i].LineasPedido[j].Producto.Precio * ordenesEntrega[i].LineasPedido[j].Cantidad}");
+                        totalPedido += ordenesEntrega[i].LineasPedido[j].Producto.Precio * ordenesEntrega[i].LineasPedido[j].Cantidad;
+                    }
+                }
+
+                Console.WriteLine($"\n  Total del pedido: ${totalPedido}");
+                Console.WriteLine("------------------------");
+
+            }
+            Console.ReadKey();
+        }
+
         public LineaPedido[] RedimensionarArray(LineaPedido[] arrayOriginal, int nuevoTamaño)
         {
             LineaPedido[] nuevoArray = new LineaPedido[nuevoTamaño];
             Array.Copy(arrayOriginal, nuevoArray, Math.Min(arrayOriginal.Length, nuevoTamaño));
             return nuevoArray;
         }
-        // Rest of the methods remain unchanged
+
+        public void CambiarCantidadProducto(int indicePedido)
+        {
+            Console.Write("Seleccione el número de producto que desea modificar: ");
+            if (int.TryParse(Console.ReadLine(), out int opcionProducto) && opcionProducto >= 1 && opcionProducto <= pedidos[indicePedido].LineasPedido.Length)
+            {
+                Console.Write("Nueva cantidad: ");
+                if (int.TryParse(Console.ReadLine(), out int nuevaCantidad))
+                {
+                    // Verificar si hay suficiente stock
+                    if (pedidos[indicePedido].LineasPedido[opcionProducto - 1].Producto.CantidadEnStock >= nuevaCantidad)
+                    {
+                        pedidos[indicePedido].LineasPedido[opcionProducto - 1].Cantidad = nuevaCantidad;
+                        Console.WriteLine("Cantidad modificada correctamente.");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"No hay suficiente stock. Cantidad disponible: {pedidos[indicePedido].LineasPedido[opcionProducto - 1].Producto.CantidadEnStock}.");
+                        Console.ReadKey();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Cantidad inválida.");
+                    Console.ReadKey();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Opción inválida.");
+                Console.ReadKey();
+            }
+        }
+
+        public void EliminarProducto(int indicePedido)
+        {
+            Console.Write("Seleccione el número de producto que desea eliminar: ");
+            if (int.TryParse(Console.ReadLine(), out int opcionProducto) && opcionProducto >= 1 && opcionProducto <= pedidos[indicePedido].LineasPedido.Length)
+            {
+                // Desplazar los productos restantes una posición hacia atrás
+                for (int i = opcionProducto - 1; i < pedidos[indicePedido].LineasPedido.Length - 1; i++)
+                {
+                    pedidos[indicePedido].LineasPedido[i] = pedidos[indicePedido].LineasPedido[i + 1];
+                }
+
+                // Marcar el último producto como nulo
+                pedidos[indicePedido].LineasPedido[pedidos[indicePedido].LineasPedido.Length - 1] = null;
+
+                Console.WriteLine("Producto eliminado correctamente.");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("Opción inválida.");
+                Console.ReadKey();
+            }
+        }
+
+        public void AgregarProductoAPedido(int indicePedido)
+        {
+            if (pedidos[indicePedido].LineasPedido.Length == 0)
+            {
+                Console.WriteLine("No hay productos disponibles para agregar.");
+                Console.ReadKey();
+                return;
+            }
+
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine($"=== AGREGAR PRODUCTO A PEDIDO {indicePedido + 1} ===");
+                Console.WriteLine($"Negocio: {pedidos[indicePedido].Negocio.Nombre}, Fecha: {pedidos[indicePedido].FechaPedido}");
+
+                // Mostrar productos disponibles
+                Console.WriteLine("\nProductos disponibles:");
+                for (int i = 0; i < pedidos[indicePedido].LineasPedido.Length; i++)
+                {
+                    if (pedidos[indicePedido].LineasPedido[i] != null)
+                    {
+                        Console.WriteLine($"{i + 1}. {pedidos[indicePedido].LineasPedido[i].Producto.Nombre} - Cantidad en stock: {pedidos[indicePedido].LineasPedido[i].Producto.CantidadEnStock}");
+                    }
+                }
+                Console.WriteLine("0. Volver");
+                Console.Write("Seleccione un producto: ");
+
+                if (!int.TryParse(Console.ReadLine(), out int opcionProducto) || opcionProducto < 0 || opcionProducto > pedidos[indicePedido].LineasPedido.Length)
+                {
+                    Console.WriteLine("Opción inválida. Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                if (opcionProducto == 0)
+                {
+                    break;
+                }
+
+                var productoSeleccionado = pedidos[indicePedido].LineasPedido[opcionProducto - 1].Producto;
+
+                Console.Write("Cantidad: ");
+                if (!int.TryParse(Console.ReadLine(), out int cantidad) || cantidad <= 0)
+                {
+                    Console.WriteLine("Cantidad inválida. Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                if (productoSeleccionado.CantidadEnStock >= cantidad)
+                {
+                    // Agregar producto al pedido
+                    pedidos[indicePedido].LineasPedido = RedimensionarArray(pedidos[indicePedido].LineasPedido, pedidos[indicePedido].LineasPedido.Length + 1);
+                    pedidos[indicePedido].LineasPedido[pedidos[indicePedido].LineasPedido.Length - 1] = new LineaPedido { Producto = productoSeleccionado, Cantidad = cantidad };
+                    productoSeleccionado.CantidadEnStock -= cantidad;
+                    Console.WriteLine("Producto agregado correctamente. Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine($"No hay suficiente stock del producto. Cantidad disponible: {productoSeleccionado.CantidadEnStock}. Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
+                }
+            }
+        }
+
+        public void AceptarPedido(int indicePedido)
+        {
+            Console.WriteLine("Pedido aceptado y enviado a órdenes de entrega.");
+
+            // Mover el pedido a órdenes de entrega
+            ordenesEntrega[cantidadOrdenesEntrega] = pedidos[indicePedido];
+            cantidadOrdenesEntrega++;
+
+            // Eliminar el pedido de la lista de pedidos pendientes
+            for (int i = indicePedido; i < cantidadPedidos - 1; i++)
+            {
+                pedidos[i] = pedidos[i + 1];
+            }
+            pedidos[cantidadPedidos - 1] = null;
+            cantidadPedidos--;
+
+            Console.ReadKey();
+        }
     }
 }
