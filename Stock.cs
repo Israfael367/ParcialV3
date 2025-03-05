@@ -21,6 +21,12 @@ namespace ConsoleApp1.Clases
             productos = new Producto[100]; // Capacidad máxima de 100 productos
         }
 
+        // Agregar el método GetProductos
+        public Producto[] GetProductos()
+        {
+            return productos;
+        }
+
         // Muestra la información de todos los productos en el stock, incluyendo los atributos específicos de sus subclases.
         public void mostrarUnProductoDelStockPorIndex(int i, bool mostrarEncabezado = false)
         {

@@ -87,7 +87,7 @@ namespace ConsoleApp1
                         gestorPedidos.VerPedidos();
                         break;
                     case "2":
-                        gestorPedidos.AgregarPedido(negocios, productos);
+                        gestorPedidos.AgregarPedido(Negocios, productos: StockProductos.GetProductos());
                         break;
                     case "3":
                         gestorPedidos.ModificarPedido();
