@@ -6,11 +6,67 @@ using proyecto2.modelos;
 
 namespace ConsoleApp1.Clases
 {
+
+    /*
+    TDA Stock
+
+    -----------Descripción-----------
+
+    El TDA (Tipo de Datos Abstracto) Stock representa la gestión de productos en un sistema de inventario. Este TDA permite ver, ingresar, modificar y eliminar productos del stock, así como inicializar productos predefinidos y generar facturas basadas en pedidos.
+
+    -----------Atributos-----------
+
+    - numProductos: Número de productos en el stock. (Tipo: int)
+    - productos: Array que almacena los productos en el stock. (Tipo: Producto?[])
+    - IVA: Constante que representa el valor del IVA (16%). (Tipo: decimal)
+
+    -----------Métodos-----------
+
+    - Stock()
+      Constructor que inicializa el stock con una capacidad máxima de 100 productos.
+
+    - GetProductos()
+      Retorna el array de productos en el stock.
+
+    - mostrarUnProductoDelStockPorIndex(int i, bool mostrarEncabezado = false)
+      Muestra la información de un producto en el stock por su índice, incluyendo los atributos específicos de sus subclases.
+
+    - mostrarStock()
+      Muestra la información de todos los productos en el stock.
+
+    - IngresarProducto(Producto p)
+      Permite ingresar un nuevo producto al stock.
+
+    - IngresarProductosPredefinidos(Producto[] productosPredefinidos)
+      Permite ingresar productos predefinidos al stock.
+
+    - ModificarProductoIndex(int index, Producto nuevoP)
+      Permite modificar un producto en el stock por su índice.
+
+    - EliminarProducto(int id)
+      Permite eliminar un producto del stock por su ID.
+
+    - BuscarProductoPorID(int idProducto)
+      Busca un producto en el stock por su ID y retorna su índice.
+
+    - ObtenerProductoPorID(int idProducto)
+      Busca un producto en el stock por su ID y retorna el objeto producto.
+
+    - EstaVacio()
+      Verifica si el stock está vacío.
+
+    - Estalleno()
+      Verifica si el stock está lleno.
+
+    - GenerarFactura(PedidoPreventivo pedido)
+      Genera una factura basada en un pedido preventivo y actualiza el stock.
+    */
+
     public class Stock
     {
         // Atributos privados
         private int numProductos;
-        private Producto?[] productos;
+        private Producto[] productos;
 
         const decimal IVA = 0.16m;
 

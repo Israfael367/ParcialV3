@@ -1,4 +1,5 @@
 ﻿using System;
+
 using ConsoleApp1.Clases;
 using proyecto2.gestores;
 using proyecto2.modelos;
@@ -16,6 +17,8 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             bool continuar = true;
+            ObtenerProductosPredefinidos();
+            ObtenerNegociosPredefinidos();
 
             while (continuar)
             {
@@ -62,6 +65,18 @@ namespace ConsoleApp1
                 }
 
             }
+        }
+
+        static void ObtenerProductosPredefinidos()
+        {
+            var productosPredefinidos = GestionProductos.ObtenerProductosPredefinidos();
+            StockProductos.IngresarProductosPredefinidos(productosPredefinidos);
+        }
+        static void ObtenerNegociosPredefinidos()
+        {
+            var negociosPredefinidos = GestionDeNegocios.ObtenerNegociosPredefinidos();
+            Array.Copy(negociosPredefinidos, Negocios, negociosPredefinidos.Length);
+            contadorNegocios = negociosPredefinidos.Length;
         }
 
         static void PedidosYOrdenesDeEntrega()

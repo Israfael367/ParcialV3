@@ -6,6 +6,36 @@ using proyecto2.modelos;
 
 namespace ConsoleApp1.Clases
 {
+    /*
+    TDA Negocio
+
+    -----------Descripción-----------
+
+    El TDA (Tipo de Datos Abstracto) Negocio representa un negocio en un sistema de gestión. Este TDA permite crear, modificar, eliminar y listar negocios. Además, permite gestionar los pedidos asociados al negocio mediante una relación de composición con la clase PedidoPreventivo.
+
+    -----------Atributos-----------
+
+    - Id: Identificador único del negocio. (Tipo: int)
+    - Nombre: Nombre del negocio. (Tipo: string?)
+    - Ubicacion: Ubicación del negocio. (Tipo: string?)
+    - Telefono: Número de teléfono del negocio. (Tipo: string?)
+    - Email: Dirección de correo electrónico del negocio. (Tipo: string?)
+    - contadorPedidos: Contador para llevar el seguimiento de los pedidos en el array. (Tipo: int)
+    - Pedidos: Array que almacena los pedidos asociados al negocio. (Tipo: PedidoPreventivo[])
+
+    -----------Constructores-----------
+
+    - Negocio()
+    Constructor por defecto que inicializa un negocio con valores predeterminados y asigna un ID autoincremental.
+
+    - Negocio(int id, string nombre, string ubicacion, string telefono, string email, int capacidadPedidos)
+    Constructor que inicializa un negocio con los valores proporcionados y asigna un ID autoincremental. El array de pedidos se inicializa con la capacidad especificada.
+
+    -----------Métodos-----------
+
+    - Los métodos para gestionar los negocios y pedidos se pueden agregar según sea necesario.
+    */
+
     public class Negocio
     {
         // Atributos

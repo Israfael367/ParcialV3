@@ -3,6 +3,34 @@ using ConsoleApp1.Clases;
 
 namespace proyecto2.modelos
 {
+
+    /*
+    TDA PedidoPreventivo
+
+    -----------Descripción-----------
+
+    El TDA (Tipo de Datos Abstracto) PedidoPreventivo representa un pedido preventivo en un sistema de gestión de inventarios. Este TDA permite gestionar los pedidos preventivos, incluyendo la creación de pedidos predefinidos.
+
+    -----------Atributos-----------
+
+    - Negocio: Negocio asociado al pedido. (Tipo: Negocio)
+    - LineasPedido: Array que contiene las líneas de pedido del pedido preventivo. (Tipo: LineaPedido[])
+    - FechaPedido: Fecha en la que se realizó el pedido. (Tipo: int)
+
+    -----------Métodos-----------
+
+    - ObtenerPedidosPredefinidos()
+      Retorna un array de pedidos predefinidos.
+
+    -----------Clases Internas-----------
+
+    - LineaPedido
+      Clase interna que representa una línea de pedido dentro de un pedido preventivo.
+      - Atributos:
+        - Producto: Producto incluido en la línea de pedido. (Tipo: Producto)
+        - Cantidad: Cantidad del producto en la línea de pedido. (Tipo: int)
+    */
+
     public class PedidoPreventivo
     {
         public Negocio Negocio { get; set; }

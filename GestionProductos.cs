@@ -1,10 +1,36 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ConsoleApp1.Clases
 {
+    /*
+TDA GestionProductos
+
+-----------Descripción-----------
+
+El TDA (Tipo de Datos Abstracto) GestionProductos representa la gestión de productos en un sistema de inventario. Este TDA permite ver, ingresar, modificar y eliminar productos del stock, así como inicializar productos predefinidos.
+
+-----------Métodos-----------
+
+- Menu(Stock stockProductos)
+  Muestra el menú de gestión de productos y maneja las opciones seleccionadas por el usuario.
+
+- ObtenerProductosPredefinidos()
+  Retorna un array de productos predefinidos para inicializar el stock si está vacío.
+
+- OpIngresarProducto(Stock stockProductos)
+  Permite ingresar un nuevo producto al stock solicitando la información necesaria al usuario.
+
+- OpEliminarProducto(Stock stockProductos)
+  Permite eliminar un producto del stock por su ID.
+
+- OpModificarProducto(Stock stockProductos)
+  Permite modificar un producto del stock solicitando la nueva información al usuario.
+*/
+
     public static class GestionProductos
     {
         // Menu para la Gestion de PRODUCTOS
@@ -23,7 +49,7 @@ namespace ConsoleApp1.Clases
             {
                 Console.Clear();
                 Console.WriteLine("=== GESTIÓN DE PRODUCTOS ===");
-                Console.WriteLine("1. Ver Productos ");
+                Console.WriteLine("1. Ver Productos (Inicializar Productos) ");
                 Console.WriteLine("2. Ingresar Producto ");
                 Console.WriteLine("3. Modificar Producto ");
                 Console.WriteLine("4. Eliminar Producto ");

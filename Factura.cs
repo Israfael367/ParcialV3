@@ -5,6 +5,28 @@ using proyecto2.modelos;
 
 namespace proyecto2.gestores
 {
+
+    /*
+    TDA Factura
+
+    -----------Descripción-----------
+
+    El TDA (Tipo de Datos Abstracto) Factura representa la gestión de facturas en un sistema de facturación. Este TDA permite generar y visualizar facturas basadas en órdenes de entrega.
+
+    -----------Atributos-----------
+
+    - facturas: Array que almacena las facturas generadas. (Tipo: PedidoPreventivo[])
+    - cantidadFacturas: Contador para llevar el seguimiento de las facturas almacenadas. (Tipo: int)
+
+    -----------Métodos-----------
+
+    - GenerarFactura(GestorPedidos gestorPedidos)
+      Genera una nueva factura basada en una orden de entrega seleccionada del gestor de pedidos y la almacena en el array de facturas.
+
+    - VerFacturas()
+      Muestra la lista de facturas generadas con sus detalles correspondientes.
+    */
+
     public class Factura
     {
         private PedidoPreventivo[] facturas = new PedidoPreventivo[100];

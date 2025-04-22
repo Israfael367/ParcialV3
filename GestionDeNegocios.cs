@@ -5,6 +5,50 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Clases
 {
+
+    /*
+    TDA GestionDeNegocios
+
+    -----------Descripción-----------
+
+    El TDA (Tipo de Datos Abstracto) GestionDeNegocios representa la gestión de negocios en un sistema de inventario. Este TDA permite ver, agregar, modificar y eliminar negocios del stock, así como inicializar negocios predefinidos.
+
+    -----------Métodos-----------
+
+    - Menu(Negocio[] negocios, ref int contadorNegocios)
+      Muestra el menú de gestión de negocios y maneja las opciones seleccionadas por el usuario.
+
+    - MostrarUnNegocio(Negocio negocio, bool MostrarEncabezadoTabla = false)
+      Muestra la información de un negocio específico.
+
+    - MostrarNegocios(Negocio[] negocios, int contadorNegocios)
+      Muestra la lista de negocios disponibles.
+
+    - OpAgregarNegocio(Negocio[] negocios, ref int contadorNegocios)
+      Permite agregar un nuevo negocio al stock solicitando la información necesaria al usuario.
+
+    - OpModificarNegocio(Negocio[] negocios, int contadorNegocios)
+      Permite modificar un negocio del stock solicitando la nueva información al usuario.
+
+    - OpEliminarNegocio(Negocio[] negocios, ref int contadorNegocios)
+      Permite eliminar un negocio del stock por su ID.
+
+    - BuscarNegocioPorID(int idNegocio, Negocio[] negocios, int contadorNegocios)
+      Busca un negocio por su ID y retorna su posición en el arreglo.
+
+    - ObtenerNegocioPorID(int idNegocio, Negocio[] negocios, int contadorNegocios)
+      Obtiene un negocio por su ID y lo retorna.
+
+    - ArregloNegociosEstaVacio(int contadorNegocios)
+      Verifica si el arreglo de negocios está vacío.
+
+    - ObtenerNegociosPredefinidos()
+      Retorna un array de negocios predefinidos para inicializar el stock si está vacío.
+
+    - ArregloNegociosEstalleno(int contadorNegocios)
+      Verifica si el arreglo de negocios está lleno.
+    */
+
     public class GestionDeNegocios
     {
         // Menu para la Gestion de NEGOCIOS
@@ -24,7 +68,7 @@ namespace ConsoleApp1.Clases
             {
                 Console.Clear();
                 Console.WriteLine("=== GESTIÓN DE NEGOCIOS ===");
-                Console.WriteLine("1. Ver Negocios");
+                Console.WriteLine("1. Ver Negocios (Inicializar Negocios)");
                 Console.WriteLine("2. Agregar Negocio");
                 Console.WriteLine("3. Modificar Negocio");
                 Console.WriteLine("4. Eliminar Negocio");

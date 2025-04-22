@@ -5,6 +5,54 @@ using ConsoleApp1.Clases;
 
 namespace proyecto2.gestores
 {
+
+    /*
+    TDA GestorPedidos
+
+    -----------Descripción-----------
+
+    El TDA (Tipo de Datos Abstracto) GestorPedidos representa la gestión de pedidos en un sistema de inventario. Este TDA permite ver, agregar, modificar y eliminar pedidos, así como gestionar las órdenes de entrega.
+
+    -----------Atributos-----------
+
+    - pedidos: Array que almacena los pedidos realizados. (Tipo: PedidoPreventivo[])
+    - cantidadPedidos: Contador para llevar el seguimiento de los pedidos almacenados. (Tipo: int)
+    - ordenesEntrega: Array que almacena las órdenes de entrega generadas. (Tipo: PedidoPreventivo[])
+    - cantidadOrdenesEntrega: Contador para llevar el seguimiento de las órdenes de entrega almacenadas. (Tipo: int)
+
+    -----------Métodos-----------
+
+    - VerPedidos()
+      Muestra la lista de pedidos realizados con sus detalles correspondientes.
+
+    - AgregarPedido(Negocio[] negocios, Producto[] productos)
+      Permite agregar un nuevo pedido seleccionando un negocio y productos de diferentes categorías.
+
+    - EliminarPedido()
+      Permite eliminar un pedido seleccionado de la lista de pedidos.
+
+    - ModificarPedido()
+      Permite modificar un pedido existente, cambiando la cantidad de productos, eliminando productos o agregando nuevos productos.
+
+    - VerOrdenesEntrega()
+      Muestra la lista de órdenes de entrega generadas con sus detalles correspondientes.
+
+    - RedimensionarArray(LineaPedido[] arrayOriginal, int nuevoTamaño)
+      Redimensiona un array de líneas de pedido a un nuevo tamaño.
+
+    - CambiarCantidadProducto(int indicePedido)
+      Permite cambiar la cantidad de un producto en un pedido seleccionado.
+
+    - EliminarProducto(int indicePedido)
+      Permite eliminar un producto de un pedido seleccionado.
+
+    - AgregarProductoAPedido(int indicePedido)
+      Permite agregar un nuevo producto a un pedido seleccionado.
+
+    - AceptarPedido(int indicePedido)
+      Acepta un pedido y lo mueve a la lista de órdenes de entrega.
+    */
+
     public class GestorPedidos
     {
         public PedidoPreventivo[] pedidos = new PedidoPreventivo[100];
