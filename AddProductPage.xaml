@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClaseNetMaui.Views.AddProductPage"
+             xmlns:model="clr-namespace:ClaseNetMaui.Models"
+             Title="Producto">
+    <ScrollView>
+        <VerticalStackLayout Margin="15" Spacing="10">
+            <Label Text="" x:Name="LTitle" FontAttributes="Bold" FontSize="18" Margin="0,15"/>
+
+            <Label Text="Nombre del Producto:" FontSize="12"/>
+            <Entry x:Name="EName"/>
+
+            <Label Text="Descripción del Producto:" FontSize="12"/>
+            <Editor x:Name="EdNote"/>
+
+            <Label Text="Categoría del Producto:" FontSize="12"/>
+            <Picker x:Name="PCategoria" Title="Selecciona una categoría"
+                    SelectedIndexChanged="PCategoria_SelectedIndexChanged"/>
+
+            <Label Text="Subcategoría:" FontSize="12"/>
+            <Picker x:Name="PSubcategoria" Title="Selecciona una subcategoría"/>
+
+            <Button Text="Guardar" x:Name="BtnSave" Clicked="BtnSave_Clicked"/>
+            <Button Text="Eliminar" x:Name="BtnDelete" Clicked="BtnDelete_Clicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

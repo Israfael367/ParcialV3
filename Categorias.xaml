@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:ClaseNetMaui.Models"
+             x:Class="ClaseNetMaui.Views.Categoria"
+             Title="Categorías"
+             BackgroundColor="#0E0E0E">
+
+    <VerticalStackLayout Spacing="10" Margin="15">
+        <Label Text="Categorías" FontSize="22" FontAttributes="Bold" TextColor="#FF0000" HorizontalOptions="Center"/>
+        <CollectionView x:Name="CVCategorias"
+                        ItemsSource="{Binding listaCategorias}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <!-- Categoría principal (expandible al tocar) -->
+                        <Frame BackgroundColor="Transparent" BorderColor="#960202" CornerRadius="0" HasShadow="False" Padding="0">
+                            <Grid>
+                                <Label Text="{Binding Nombre}" FontSize="18" TextColor="White"
+                                       Padding="8,5,8,5">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.ToggleExpandCommand, Source={x:Reference CVCategorias}}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </Frame>
+                        <!-- Subcategorías desplegables -->
+                        <StackLayout Margin="25,0,0,0" IsVisible="{Binding IsExpanded}">
+                            <CollectionView ItemsSource="{Binding Subcategorias}"
+                                            SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label FontSize="15" TextColor="#FFB300">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="• " />
+                                                    <Span Text="{Binding Nombre}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.EditarSubcategoriaCommand, Source={x:Reference CVCategorias}}"
+                                                                      CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Button Text="Agregar subcategoría"
+                                    FontSize="14"
+                                    BackgroundColor="#960202"
+                                    TextColor="White"
+                                    HorizontalOptions="Start"
+                                    Margin="0,5,0,5"
+                                    Clicked="BtnAddSubcategoria_Clicked"
+                                    CommandParameter="{Binding .}">
+                            </Button>
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Agregar" x:Name="BtnAddCategoria" Clicked="BtnAddCategoria_Clicked"
+                BackgroundColor="#FF0000" TextColor="White"
+                HorizontalOptions="End" Margin="0,10,0,0" WidthRequest="120"/>
+    </VerticalStackLayout>
+</ContentPage>

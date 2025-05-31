@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:model="clr-namespace:ClaseNetMaui.Models"
+             x:Class="ClaseNetMaui.Views.MainPage"
+             BackgroundColor="#0E0E0E">
+
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="#960202" StatusBarStyle="DarkContent"/>
+    </Page.Behaviors>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Margin="15">
+            <!-- Entrada de búsqueda -->
+            <Entry Placeholder="Buscar" PlaceholderColor="#960202" Completed="ESearch_Completed" x:Name="ESearch"/>
+
+            <!-- ListView para mostrar los productos -->
+            <ListView x:Name="LV" ItemTapped="LV_ItemTapped" SeparatorColor="#960202"
+                      ItemsSource="{Binding listaProductos}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid ColumnDefinitions="auto, *" RowDefinitions="*" ColumnSpacing="10">
+                                <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="5">
+                                    <Label Text="{Binding Nombre}" TextColor="White"/>
+                                    <Label Text="{Binding Descripcion}" TextColor="Gray"/>
+                                    <!-- Muestra la categoría correctamente -->
+                                    <Label Text="{Binding Categoria.Nombre, StringFormat='Categoría: {0}'}" TextColor="#FFB300"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!-- Botón para agregar productos -->
+            <Button Text="Agregar" HorizontalOptions="End" Clicked="BtnAdd_Clicked" x:Name="BtnAdd" BackgroundColor="#FF0000"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
